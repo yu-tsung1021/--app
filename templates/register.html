@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>註冊 - FoodieBag</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div style="position:fixed;top:16px;left:16px;z-index:1000;cursor:pointer;" onclick="window.history.back()" title="返回上一頁">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    </div>
+    <div class="form-container">
+        <h2>註冊</h2>
+        <form action="/register" method="post">
+            <label for="username">帳號：</label>
+            <input type="text" id="username" name="username" required>
+
+
+            <label for="phone">手機號碼：</label>
+            <input type="text" id="phone" name="phone" value="{{ phone|default('') }}" required pattern="09\\d{8}" placeholder="09xxxxxxxx">
+
+            <label for="password">密碼：</label>
+            <input type="password" id="password" name="password" required>
+            <label for="confirm_password">確認密碼：</label>
+            <input type="password" id="confirm_password" name="confirm_password" required>
+            <button type="submit" class="btn">註冊</button>
+        </form>
+        <script>
+        function sendSMSCode() {
+            const phone = document.getElementById('phone').value;
+            if (!/^09\d{8}$/.test(phone)) {
+                alert('請輸入正確的台灣手機號碼 (09開頭共10碼)');
+                return;
+            }
+            fetch('/send_sms_code', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ phone })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    alert('驗證碼已發送，請查收簡訊');
+                } else {
+                    alert('發送失敗：' + data.message);
+                }
+            });
+        }
+        </script>
+        <p>已經有帳號？<a href="/login">登入</a></p>
+    </div>
+</body>
+</html>

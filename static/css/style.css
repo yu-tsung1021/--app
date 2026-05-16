@@ -1,0 +1,138 @@
+
+body {
+    font-family: 'Segoe UI', '微軟正黑體', Arial, sans-serif;
+    background: linear-gradient(120deg, #f8b500 0%, #fceabb 100%);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    animation: bg-move 8s ease-in-out infinite alternate;
+}
+
+@keyframes bg-move {
+    0% { background-position: left top; }
+    100% { background-position: right bottom; }
+}
+
+.cover-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: rgba(255,255,255,0.7);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+    border-radius: 20px;
+    margin: 40px;
+    animation: fade-in 1.2s;
+}
+
+@keyframes fade-in {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.cover-container h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5em;
+    animation: pop-in 1s cubic-bezier(.68,-0.55,.27,1.55);
+}
+
+@keyframes pop-in {
+    0% { opacity: 0; transform: scale(0.7); }
+    80% { opacity: 1; transform: scale(1.1); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+.cover-container .highlight {
+    color: #f8b500;
+    font-weight: bold;
+}
+
+.cover-container p {
+    font-size: 1.3rem;
+    margin-bottom: 2em;
+}
+
+.auth-links {
+    display: flex;
+    gap: 1.5em;
+}
+
+.btn {
+    background: #f8b500;
+    color: #fff;
+    padding: 0.7em 2em;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: background 0.2s, transform 0.2s;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(248,181,0,0.08);
+    animation: btn-fade-in 1.5s 0.5s backwards;
+}
+
+@keyframes btn-fade-in {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.btn:hover {
+    background: #e09e00;
+    transform: scale(1.07);
+    box-shadow: 0 4px 16px rgba(248,181,0,0.18);
+}
+
+.form-container {
+    background: rgba(255,255,255,0.95);
+    max-width: 350px;
+    margin: 60px auto;
+    padding: 2.5em 2em;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px 0 rgba(31, 38, 135, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fade-in 1.2s;
+}
+
+.form-container h2 {
+    margin-bottom: 1.5em;
+    color: #f8b500;
+}
+
+.form-container label {
+    align-self: flex-start;
+    margin-bottom: 0.3em;
+    margin-top: 1em;
+    font-weight: 500;
+}
+
+.form-container input[type="text"],
+.form-container input[type="password"] {
+    width: 100%;
+    padding: 0.6em;
+    margin-bottom: 0.5em;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1em;
+}
+
+.form-container .btn {
+    width: 100%;
+    margin-top: 1.5em;
+}
+
+.form-container p {
+    margin-top: 1.5em;
+    font-size: 0.95em;
+}
+
+.form-container a {
+    color: #f8b500;
+    text-decoration: none;
+}
+
+.form-container a:hover {
+    text-decoration: underline;
+}

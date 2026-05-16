@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登入 - FoodieBag</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div style="position:fixed;top:16px;left:16px;z-index:1000;cursor:pointer;" onclick="window.history.back()" title="返回上一頁">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    </div>
+    <div class="form-container">
+        <h2>登入</h2>
+        <form action="/login" method="post">
+            <label for="username">帳號：</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">密碼：</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit" class="btn">登入</button>
+        </form>
+        <p>還沒有帳號？<a href="/register">註冊</a></p>
+    </div>
+</body>
+</html>
