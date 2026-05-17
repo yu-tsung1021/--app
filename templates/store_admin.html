@@ -18,6 +18,9 @@
             </div>
             <form action="/store_admin" method="post" enctype="multipart/form-data" class="admin-form">
                 <label>店家名稱：<input type="text" name="name" value="{{ store.name|default('') }}" required></label><br>
+                <label>店家地址：<input type="text" name="address" value="{{ store.address|default('') }}" required></label><br>
+                <label>營業開始：<input type="time" name="open_time" value="{{ store.open_time|default('') }}"></label>
+                <label>營業結束：<input type="time" name="close_time" value="{{ store.close_time|default('') }}"></label><br>
                 <label>主頁介紹：<textarea name="desc" required>{{ store.desc|default('') }}</textarea></label><br>
                     <label class="file-input-wrap">主頁圖片：
                         <input type="file" id="cover_img" name="cover" style="display:none;">
@@ -65,16 +68,49 @@
         });
         </script>
         <div class="menu-list">
-        {% for item in store.menu %}
-            <div class="menu-card">
-                <img src="{{ item.img }}" class="menu-img"> 
-                <div class="menu-info">
-                    <div class="menu-title">{{ item.name }}</div>
-                    <div class="menu-price">${{ item.price }}</div>
-                    <div class="menu-desc">{{ item.desc }}</div>
+                {% for item in store.menu %}
+                        <div class="menu-card" style="position:relative;cursor:pointer;" onclick="openSurplusModal('{{ item.name|escape }}')">
+                                <form method="post" action="/delete_menu_item" style="position:absolute;top:4px;right:8px;z-index:2;" onclick="event.stopPropagation();">
+                                        <input type="hidden" name="item_name" value="{{ item.name }}">
+                                        <button type="submit" style="background:none;border:none;color:#d00;font-size:1.2em;cursor:pointer;" title="刪除餐點" onclick="return confirm('確定要刪除此餐點嗎？');">×</button>
+                                </form>
+                                <img src="{{ item.img }}" class="menu-img"> 
+                                <div class="menu-info">
+                                        <div class="menu-title">{{ item.name }}</div>
+                                        <div class="menu-price">${{ item.price }}</div>
+                                        <div class="menu-desc">{{ item.desc }}</div>
+                                        {% if item.surplus is defined %}
+                                                <div style="color:#4caf50;font-size:0.95em;">剩餘：{{ item.surplus }} 份 (已發布)</div>
+                                        {% endif %}
+                                </div>
+                        </div>
+                {% endfor %}
+                <!-- 剩餘數量 modal -->
+                <div id="surplus-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.4);z-index:2000;align-items:center;justify-content:center;">
+                    <form method="post" action="/publish_surplus" style="background:#fff;max-width:90vw;width:320px;padding:24px 18px 18px 18px;border-radius:8px;box-shadow:0 2px 16px #0002;position:relative;display:flex;flex-direction:column;align-items:center;">
+                        <h3 style="margin-top:0;">發布剩餘數量</h3>
+                        <input type="hidden" name="item_name" id="modal_item_name">
+                        <label>剩餘份數：<input type="number" name="surplus" id="modal_surplus" min="1" required style="width:80px;"></label>
+                        <div style="margin-top:16px;display:flex;gap:12px;">
+                            <button type="submit" class="btn">發布</button>
+                            <button type="button" onclick="closeSurplusModal()">取消</button>
+                        </div>
+                    </form>
                 </div>
-            </div>
-        {% endfor %}
+                <script>
+                function openSurplusModal(itemName) {
+                    document.getElementById('modal_item_name').value = itemName;
+                    document.getElementById('modal_surplus').value = '';
+                    document.getElementById('surplus-modal').style.display = 'flex';
+                }
+                function closeSurplusModal() {
+                    document.getElementById('surplus-modal').style.display = 'none';
+                }
+                // 防止點擊 modal 外部關閉
+                document.getElementById('surplus-modal').addEventListener('click', function(e){
+                    if(e.target === this) closeSurplusModal();
+                });
+                </script>
         </div>
     </div>
 </body>

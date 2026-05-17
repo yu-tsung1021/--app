@@ -32,6 +32,32 @@
             <label for="email">Email：</label>
             <input type="email" id="email" name="email" value="{{ email|default('') }}" required><br>
 
+            <div style="margin:10px 0;">
+                                <input type="checkbox" id="agree_terms" name="agree_terms" required>
+                                <label for="agree_terms" style="display:inline;">我已閱讀並同意 <a href="#" onclick="showTerms();return false;">店家條款</a></label>
+                                <div id="terms-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.4);z-index:1000;align-items:center;justify-content:center;">
+                                    <div style="background:#fff;max-width:90vw;width:400px;max-height:80vh;overflow:auto;padding:24px 18px 18px 18px;border-radius:8px;box-shadow:0 2px 16px #0002;position:relative;">
+                                        <h3 style="margin-top:0;">店家條款</h3>
+                                        <pre id="terms-content" style="white-space:pre-wrap;font-size:1em;max-height:50vh;overflow:auto;background:#f8f8f8;padding:12px;border-radius:4px;"></pre>
+                                        <button onclick="closeTerms()" style="margin-top:16px;">關閉</button>
+                                    </div>
+                                </div>
+                                <script>
+                                function showTerms() {
+                                    var modal = document.getElementById('terms-modal');
+                                    var content = document.getElementById('terms-content');
+                                    modal.style.display = 'flex';
+                                    fetch('/static/terms/store_terms.txt')
+                                        .then(r => r.text())
+                                        .then(t => { content.textContent = t; })
+                                        .catch(() => { content.textContent = '無法載入條款內容'; });
+                                }
+                                function closeTerms() {
+                                    document.getElementById('terms-modal').style.display = 'none';
+                                }
+                                </script>
+            </div>
+
             <button type="submit" class="btn">送出</button>
         </form>
     </div>

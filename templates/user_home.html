@@ -5,6 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>美食餐廳總覽</title>
     <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+        .store-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .store-card {
+            margin-bottom: 0 !important;
+        }
+
+        @media (max-width: 768px) {
+            .store-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <div id="back-arrow" class="back-arrow" onclick="animateBack()" title="返回上一頁">

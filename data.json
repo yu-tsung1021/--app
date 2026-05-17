@@ -1,7 +1,7 @@
 {
   "stores": [
     {
-      "name": "123",
+      "name": "麥麥",
       "code": "BPDK64JY",
       "password": "4444",
       "owner_phone": "0906205016",
@@ -10,18 +10,16 @@
       "cover": "/static/uploads/jpg",
       "menu": [
         {
-          "name": "漢堡",
-          "price": "100",
-          "desc": "牛肉與麵包",
-          "img": "/static/uploads/images.jpg"
-        },
-        {
           "name": "薯條",
           "price": "40",
           "desc": "細薯",
-          "img": "/static/uploads/images_1.jpg"
+          "img": "/static/uploads/images_1.jpg",
+          "surplus": 1
         }
-      ]
+      ],
+      "address": "白宮",
+      "open_time": "10:55",
+      "close_time": "23:55"
     },
     {
       "name": "八方雲集",
@@ -39,6 +37,26 @@
           "img": "/static/uploads/caption.jpg"
         }
       ]
+    },
+    {
+      "name": "肯肯",
+      "code": "P7Q4EPJ3",
+      "password": "666666",
+      "owner_phone": "0906205014",
+      "email": "5b1g0002@stust.edu.tw",
+      "desc": "全家桶沒有雞全家",
+      "cover": "/static/uploads/KFC.svg.png",
+      "menu": [
+        {
+          "name": "全家桶",
+          "price": "999",
+          "desc": "nn最愛",
+          "img": "/static/uploads/d8184035.jpg"
+        }
+      ],
+      "address": "肯老爺家",
+      "open_time": "00:07",
+      "close_time": "12:08"
     }
   ]
 }

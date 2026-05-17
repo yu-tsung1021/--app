@@ -25,18 +25,30 @@
             <img src="{{ store.cover }}" style="width:160px;max-width:90vw;max-height:120px;object-fit:cover;border-radius:8px;display:block;margin-bottom:12px;">
         {% endif %}
         <hr>
+        <div class="store-info" style="margin-bottom:12px;">
+            <div><strong>地址：</strong>{{ store.address|default('未設定') }}</div>
+            <div><strong>營業時間：</strong>{{ store.open_time|default('未設定') }} - {{ store.close_time|default('未設定') }}</div>
+        </div>
         <h3>菜單</h3>
+        {% if not is_open %}
+            <div style="color:#d00;margin:12px 0;">目前非營業時間。營業時間：{{ store.open_time|default('未設定') }} - {{ store.close_time|default('未設定') }}</div>
+        {% endif %}
         <div class="menu-list">
+        {% if is_open %}
         {% for item in store.menu %}
+            {% if item.surplus is defined and item.surplus|int > 0 %}
             <div class="menu-card">
                 <img src="{{ item.img }}" class="menu-img">
                 <div class="menu-info">
                     <div class="menu-title">{{ item.name }}</div>
                     <div class="menu-price">${{ item.price }}</div>
                     <div class="menu-desc">{{ item.desc }}</div>
+                    <div style="color:#4caf50;font-size:0.95em;">剩餘：{{ item.surplus }} 份</div>
                 </div>
             </div>
+            {% endif %}
         {% endfor %}
+        {% endif %}
         </div>
     </div>
 </body>

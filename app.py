@@ -66,7 +66,26 @@ def store(code):
             break
     if not store:
         return '找不到該餐廳', 404
-    return render_template('store.html', store=store)
+    # 判斷是否在營業時間
+    is_open = True
+    try:
+        from datetime import datetime, time as dtime
+        open_t = store.get('open_time', '')
+        close_t = store.get('close_time', '')
+        if open_t and close_t:
+            oh, om = map(int, open_t.split(':'))
+            ch, cm = map(int, close_t.split(':'))
+            ot = dtime(oh, om)
+            ct = dtime(ch, cm)
+            now = datetime.now().time()
+            if ot <= ct:
+                is_open = (ot <= now <= ct)
+            else:
+                # 跨午夜情況
+                is_open = (now >= ot) or (now <= ct)
+    except Exception:
+        is_open = True
+    return render_template('store.html', store=store, is_open=is_open)
 
 
 
@@ -280,6 +299,37 @@ def add_menu_item():
         json.dump(data, f, ensure_ascii=False, indent=2)
     return redirect(url_for('store_admin'))
 
+
+# 店家發布剩餘數量（從前端 modal 提交）
+@app.route('/publish_surplus', methods=['POST'])
+def publish_surplus():
+    code = session.get('store_code')
+    if not code:
+        return redirect(url_for('store_login'))
+    data_path = os.path.join(os.path.dirname(__file__), 'data.json')
+    with open(data_path, 'r', encoding='utf-8') as f:
+        data = json.load(f)
+    store = None
+    for s in data['stores']:
+        if s['code'] == code:
+            store = s
+            break
+    if not store:
+        return redirect(url_for('store_login'))
+    item_name = request.form.get('item_name', '')
+    surplus = request.form.get('surplus', '0')
+    try:
+        surplus_val = int(surplus)
+    except:
+        surplus_val = 0
+    for item in store.get('menu', []):
+        if item.get('name') == item_name:
+            item['surplus'] = surplus_val
+            break
+    with open(data_path, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+    return redirect(url_for('store_admin'))
+
 # 店家主頁資料儲存
 @app.route('/store_admin', methods=['POST'])
 def store_admin_post():
@@ -298,6 +348,9 @@ def store_admin_post():
         return redirect(url_for('store_login'))
 
     store['name'] = request.form.get('name', store['name'])
+    store['address'] = request.form.get('address', store.get('address', ''))
+    store['open_time'] = request.form.get('open_time', store.get('open_time', ''))
+    store['close_time'] = request.form.get('close_time', store.get('close_time', ''))
     store['desc'] = request.form.get('desc', store.get('desc', ''))
     # 處理主頁圖片
     cover_file = request.files.get('cover')
