@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>店家後台</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="form-container">
+        {% if msg %}<div style="color:green">{{ msg }}</div>{% endif %}
+        <div style="max-width:520px;margin:0 auto;">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:170px;margin-bottom:16px;">
+                <h2 style="margin:0;">店家主頁設定</h2>
+                <div style="display:flex;gap:12px;align-items:center;">
+                    <a href="/store_change_password" class="change-password-btn-inline">修改密碼</a>
+                    <a href="/" class="logout-btn-inline">登出</a>
+                </div>
+            </div>
+            <form action="/store_admin" method="post" enctype="multipart/form-data" class="admin-form">
+                <label>店家名稱：<input type="text" name="name" value="{{ store.name|default('') }}" required></label><br>
+                <label>主頁介紹：<textarea name="desc" required>{{ store.desc|default('') }}</textarea></label><br>
+                    <label class="file-input-wrap">主頁圖片：
+                        <input type="file" id="cover_img" name="cover" style="display:none;">
+                        <button type="button" class="file-input-btn" onclick="document.getElementById('cover_img').click();">選擇圖片</button>
+                        <span class="file-name" id="cover_img_name">尚未選擇檔案</span>
+                    </label>
+                        {% if store.cover %}<img src="{{ store.cover }}" id="cover_preview" style="max-width:120px;display:block;margin:8px 0;">{% else %}<img src="" id="cover_preview" style="max-width:120px;display:none;margin:8px 0;">{% endif %}
+                <button type="submit" class="btn">儲存主頁</button>
+            </form>
+        </div>
+        <hr>
+        <h2>菜單管理</h2>
+        <form action="/add_menu_item" method="post" enctype="multipart/form-data" class="admin-form" style="margin-bottom:16px;">
+            <label>品名：<input type="text" name="item_name" required></label>
+            <label>價格：<input type="number" name="item_price" required></label>
+            <label>說明：<input type="text" name="item_desc" required></label>
+            <label class="file-input-wrap">圖片：
+                <input type="file" id="item_img" name="item_img" required style="display:none;">
+                <button type="button" class="file-input-btn" onclick="document.getElementById('item_img').click();">選擇圖片</button>
+                <span class="file-name" id="item_img_name">尚未選擇檔案</span>
+            </label>
+            <button type="submit" class="btn">新增菜單</button>
+        </form>
+        <script>
+        document.getElementById('item_img').addEventListener('change', function(e){
+            const el = document.getElementById('item_img_name');
+            if (this.files && this.files.length>0) el.textContent = this.files[0].name;
+            else el.textContent = '尚未選擇檔案';
+        });
+        document.getElementById('cover_img').addEventListener('change', function(e){
+            const el = document.getElementById('cover_img_name');
+            const preview = document.getElementById('cover_preview');
+            if (this.files && this.files.length>0) {
+                el.textContent = this.files[0].name;
+                const reader = new FileReader();
+                reader.onload = function(ev){
+                    preview.src = ev.target.result;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(this.files[0]);
+            } else {
+                el.textContent = '尚未選擇檔案';
+                preview.style.display = 'none';
+            }
+        });
+        </script>
+        <div class="menu-list">
+        {% for item in store.menu %}
+            <div class="menu-card">
+                <img src="{{ item.img }}" class="menu-img"> 
+                <div class="menu-info">
+                    <div class="menu-title">{{ item.name }}</div>
+                    <div class="menu-price">${{ item.price }}</div>
+                    <div class="menu-desc">{{ item.desc }}</div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

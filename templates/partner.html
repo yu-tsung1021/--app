@@ -7,9 +7,16 @@
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
-    <div style="position:fixed;top:16px;left:16px;z-index:1000;cursor:pointer;" onclick="window.history.back()" title="返回上一頁">
+    <div id="back-arrow" class="back-arrow" onclick="animateBack()" title="返回上一頁">
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
     </div>
+    <script>
+    function animateBack() {
+        const arrow = document.getElementById('back-arrow');
+        arrow.classList.add('hide');
+        setTimeout(() => window.history.back(), 400);
+    }
+    </script>
     <div class="form-container">
         <h2>成為餐廳合作夥伴</h2>
         {% if error %}

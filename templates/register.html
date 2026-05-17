@@ -7,9 +7,16 @@
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
-    <div style="position:fixed;top:16px;left:16px;z-index:1000;cursor:pointer;" onclick="window.history.back()" title="返回上一頁">
+    <div id="back-arrow" class="back-arrow" onclick="animateBack()" title="返回上一頁">
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
     </div>
+    <script>
+    function animateBack() {
+        const arrow = document.getElementById('back-arrow');
+        arrow.classList.add('hide');
+        setTimeout(() => window.history.back(), 400);
+    }
+    </script>
     <div class="form-container">
         <h2>註冊</h2>
         <form action="/register" method="post">
@@ -18,13 +25,14 @@
 
 
             <label for="phone">手機號碼：</label>
-            <input type="text" id="phone" name="phone" value="{{ phone|default('') }}" required pattern="09\\d{8}" placeholder="09xxxxxxxx">
+            <input type="text" id="phone" name="phone" value="{{ phone|default('') }}" required pattern="09[0-9]{8}" placeholder="09xxxxxxxx">
 
             <label for="password">密碼：</label>
             <input type="password" id="password" name="password" required>
             <label for="confirm_password">確認密碼：</label>
             <input type="password" id="confirm_password" name="confirm_password" required>
             <button type="submit" class="btn">註冊</button>
+            {% if error %}<div style="color:red">{{ error }}</div>{% endif %}
         </form>
         <script>
         function sendSMSCode() {

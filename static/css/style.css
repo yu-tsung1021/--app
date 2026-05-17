@@ -1,3 +1,77 @@
+.admin-form input[type="file"] {
+    display: block;
+    margin: 6px 0 12px 0;
+    font-size: 1em;
+    border: none;
+    background: none;
+    color: #333;
+}
+
+.file-input-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.file-input-btn {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+.file-input-btn:hover { background:#f5f5f5; }
+.file-name {
+    color: #666;
+    font-size: 0.95em;
+}
+.logout-btn-inline {
+    background: #f44336;
+    color: #fff !important;
+    padding: 0.5em 1.2em;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1em;
+    box-shadow: 0 2px 8px rgba(244,67,54,0.08);
+    transition: background 0.2s, transform 0.2s;
+    display: inline-block;
+    margin-left: 4px;
+}
+.logout-btn-inline:hover {
+    background: #b71c1c;
+    transform: scale(1.07);
+}
+
+.file-input::-webkit-file-upload-button {
+    background: #f8b500;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.5em 1.2em;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.file-input::-webkit-file-upload-button:hover {
+    background: #e09e00;
+}
+.file-input {
+    font-size: 1em;
+    padding: 0.2em 0.3em;
+}
+/* 返回箭頭動畫與樣式 */
+.back-arrow {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 1000;
+    cursor: pointer;
+    transition: left 1.2s cubic-bezier(.4,2,.6,1);
+}
+.back-arrow.hide {
+    left: -60px;
+}
 
 body {
     font-family: 'Segoe UI', '微軟正黑體', Arial, sans-serif;
@@ -72,6 +146,24 @@ body {
     animation: btn-fade-in 1.5s 0.5s backwards;
 }
 
+.form-container .change-password-btn-inline {
+    background: #f8b500;
+    color: #fff !important;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(248,181,0,0.08);
+    animation: btn-fade-in 1.5s 0.5s backwards;
+    display: inline-block;
+    padding: 0.5em 0.9em;
+    border-radius: 6px;
+    font-size: 1em;
+    min-width: 50px;
+    margin-left: 8px;
+}
+
 @keyframes btn-fade-in {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
@@ -83,9 +175,79 @@ body {
     box-shadow: 0 4px 16px rgba(248,181,0,0.18);
 }
 
+/* 店家後台專用 */
+.admin-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+.admin-form input[type="text"],
+.admin-form input[type="number"],
+.admin-form input[type="password"],
+.admin-form textarea {
+    width: 90%;
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-top: 2px;
+    margin-bottom: 8px;
+    font-size: 1em;
+    background: #faf9f6;
+}
+.admin-form textarea {
+    min-height: 60px;
+    resize: vertical;
+}
+.menu-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-top: 12px;
+}
+.menu-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+    display: flex;
+    align-items: center;
+    padding: 12px 18px;
+    min-width: 260px;
+    max-width: 340px;
+    flex: 1 1 260px;
+    transition: box-shadow 0.2s;
+}
+.menu-card:hover {
+    box-shadow: 0 6px 24px rgba(248,181,0,0.13);
+}
+.menu-img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 16px;
+    background: #eee;
+}
+.menu-info {
+    flex: 1;
+}
+.menu-title {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+.menu-price {
+    color: #f44336;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+.menu-desc {
+    color: #555;
+    font-size: 0.98em;
+}
+
 .form-container {
     background: rgba(255,255,255,0.95);
-    max-width: 350px;
+    max-width: 900px;
     margin: 60px auto;
     padding: 2.5em 2em;
     border-radius: 16px;

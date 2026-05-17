@@ -1,0 +1,24 @@
+{
+  "users": [
+    {
+      "username": "test1",
+      "phone": "0906205016",
+      "password": "test1test1"
+    },
+    {
+      "username": "test2",
+      "phone": "0906205015",
+      "password": "test2test2"
+    },
+    {
+      "username": "test3",
+      "phone": "0906205014",
+      "password": "test3test3"
+    },
+    {
+      "username": "test4",
+      "phone": "0906205013",
+      "password": "test4test4"
+    }
+  ]
+}

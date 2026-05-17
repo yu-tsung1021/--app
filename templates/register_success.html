@@ -2,8 +2,7 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>登入 - FoodieBag</title>
+    <title>註冊成功</title>
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
@@ -18,16 +17,10 @@
     }
     </script>
     <div class="form-container">
-        <h2>登入</h2>
-        <form action="/login" method="post">
-            <label for="account">請輸入電話或帳號：</label>
-            <input type="text" id="account" name="account" required placeholder="電話或帳號">
-            <label for="password">密碼：</label>
-            <input type="password" id="password" name="password" required>
-            <button type="submit" class="btn">登入</button>
-            {% if error %}<div style="color:red">{{ error }}</div>{% endif %}
-        </form>
-        <p>還沒有帳號？<a href="/register">註冊</a></p>
+        <h2 style="color:green;">註冊成功！</h2>
+        <div style="text-align:center; margin-top:18px;">
+            <a href="/login" class="btn" style="width:auto; min-width:120px; display:inline-block; color:aliceblue">立即登入</a>
+        </div>
     </div>
 </body>
 </html>

@@ -1,0 +1,44 @@
+{
+  "stores": [
+    {
+      "name": "123",
+      "code": "BPDK64JY",
+      "password": "4444",
+      "owner_phone": "0906205016",
+      "email": "5b1g0027@stust.edu.tw",
+      "desc": "速食餐廳",
+      "cover": "/static/uploads/jpg",
+      "menu": [
+        {
+          "name": "漢堡",
+          "price": "100",
+          "desc": "牛肉與麵包",
+          "img": "/static/uploads/images.jpg"
+        },
+        {
+          "name": "薯條",
+          "price": "40",
+          "desc": "細薯",
+          "img": "/static/uploads/images_1.jpg"
+        }
+      ]
+    },
+    {
+      "name": "八方雲集",
+      "code": "J7WDG7KQ",
+      "password": "J7WDG7KQ",
+      "owner_phone": "0906205015",
+      "email": "qwerty0906205016@gmail.com",
+      "desc": "鍋貼專賣店",
+      "cover": "/static/uploads/1200x920_wmky_082138551055_202112150135000000.jpg",
+      "menu": [
+        {
+          "name": "招牌鍋貼",
+          "price": "70",
+          "desc": "十個招牌鍋貼",
+          "img": "/static/uploads/caption.jpg"
+        }
+      ]
+    }
+  ]
+}
