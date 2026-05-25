@@ -34,9 +34,20 @@
           "name": "招牌鍋貼",
           "price": "70",
           "desc": "十個招牌鍋貼",
-          "img": "/static/uploads/caption.jpg"
+          "img": "/static/uploads/caption.jpg",
+          "surplus": 3
+        },
+        {
+          "name": "蝦餃",
+          "price": "90",
+          "desc": "十粒蝦餃",
+          "img": "/static/uploads/46418dd5a02efc34f89239035154ffcc.jpg",
+          "surplus": 1
         }
-      ]
+      ],
+      "address": "南台店",
+      "open_time": "00:12",
+      "close_time": "23:16"
     },
     {
       "name": "肯肯",
@@ -57,6 +68,16 @@
       "address": "肯老爺家",
       "open_time": "00:07",
       "close_time": "12:08"
+    },
+    {
+      "name": "711",
+      "code": "LB8KRHGD",
+      "password": "711711",
+      "owner_phone": "0906205013",
+      "email": "qwerty0906205015@gmail.com",
+      "desc": "",
+      "cover": "",
+      "menu": []
     }
   ]
 }
