@@ -3,7 +3,7 @@
     {
       "name": "麥麥",
       "code": "BPDK64JY",
-      "password": "4444",
+      "password": "55555",
       "owner_phone": "0906205016",
       "email": "5b1g0027@stust.edu.tw",
       "desc": "速食餐廳",
@@ -15,6 +15,13 @@
           "desc": "細薯",
           "img": "/static/uploads/images_1.jpg",
           "surplus": 1
+        },
+        {
+          "name": "漢堡",
+          "price": "75",
+          "desc": "牛肉漢堡",
+          "img": "/static/uploads/images.jpg",
+          "surplus": 3
         }
       ],
       "address": "白宮",
